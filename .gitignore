@@ -1,9 +1,3 @@
 .DS_Store
 algorithm_study/input.txt
-algorithm/programmers/모의고사 1차/1번.PNG
-algorithm/programmers/모의고사 1차/2번-1.PNG
-algorithm/programmers/모의고사 1차/2번-2.PNG
-algorithm/programmers/모의고사 1차/3번-1.PNG
-algorithm/programmers/모의고사 1차/3번-2.PNG
-algorithm/programmers/모의고사 1차/4번-1.PNG
-algorithm/programmers/모의고사 1차/4번-2.PNG
+*.PNG
