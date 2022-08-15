@@ -33,8 +33,7 @@ def dfs(index, nowArr):
     if index == n - 3:
         # 괄호 없을 때, 기존식 + [ 숫자 + 연산자 ]
         noBracket = nowArr + [arr[index], arr[index + 1]]
-        # 괄호 있을 때
-        # 기존식 + [ a[i] + a[i+1] + a[i+2] , a[i+3] ]
+        # 괄호 있을 때, 기존식 + [ a[i] + a[i+1] + a[i+2] , a[i+3] ]
         temp = cal(arr[index], arr[index + 2], arr[index + 1])
         bracket = nowArr + [temp]
         return max(dfs(index + 2, noBracket), calArr(bracket))
