@@ -1,5 +1,4 @@
 import sys
-from unittest import result
 
 sys.stdin = open("hunter.txt", "r", encoding="UTF-8")
 
