@@ -1,7 +1,5 @@
-from multiprocessing.connection import answer_challenge
 import sys
 from collections import deque
-from unittest import result
 sys.stdin = open("algorithm_study/SW역량테스트/shuffle.txt", "r", encoding="UTF-8")
 
 T = int(input())
