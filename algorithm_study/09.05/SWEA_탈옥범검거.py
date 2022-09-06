@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-sys.stdin = open("input.txt", "r", encoding="UTF-8")
+sys.stdin = open("09.05/prison.txt", "r", encoding="UTF-8")
 
 T = int(input())
 

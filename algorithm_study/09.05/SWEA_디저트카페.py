@@ -1,6 +1,6 @@
 import sys
 
-sys.stdin = open("input.txt", "r", encoding="UTF-8")
+sys.stdin = open("09.05/dessert.txt", "r", encoding="UTF-8")
 
 T = int(input())
 
