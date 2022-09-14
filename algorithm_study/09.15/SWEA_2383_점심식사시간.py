@@ -13,18 +13,21 @@ def selection(depth, pick, m):
     selection(depth + 1, pick + [0], m)
     selection(depth + 1, pick + [1], m)
 
+# stair: 계단에 들어갈 사람들. time: 내려가는데 걸리는 시간
+
 
 def downStairs(stair, time):
     t = 1
     down = []
     while stair or down:
         delete = []
+        # 내려가는 사람들을 처리해야 계단에 사람을 올릴 수 있다
         if down:
             for i in range(len(down)):
-                if down[i][1] == time-1:
+                down[i][1] += 1
+                if down[i][1] == time:
                     delete.append(i)
-                else:
-                    down[i][1] += 1
+
             for _ in range(len(delete)):
                 down.pop(0)
 
@@ -70,10 +73,14 @@ for test_case in range(1, T+1):
                 temp = abs(manList[i][0] - stairList[1][0]) + \
                     abs(manList[i][1] - stairList[1][1])
                 stair1.append([temp, 0])
+        # 거리가 짧은 것이 먼저 오도록 정렬
         stair0.sort()
         stair1.sort()
+
+        # 두 계단 중 큰 값이 이번 조합의 시간
         time = max(downStairs(stair0, times[0]), downStairs(stair1, times[1]))
 
+        # 최소 시간을 갱신
         minTime = min(time, minTime)
 
     print("#{} {}".format(test_case, minTime))
