@@ -19,38 +19,42 @@ for x in range(N):
         temp.append(matrix[y][x])
     candidate.append(temp)
 
-for c in candidate:
-    print(c)
-print("*************************")
 
 def check(road):
     used = [False for _ in range(N)]
     i = 0
-    while i < N-1:
-        if road[i] - road[i + 1] == 1:
-            delta = 1
-            while delta <= L:
-                if 0 <= i + delta < N:
-                    if road[i] - road[i + delta] == 1:
-                        used[i+delta] = True
-                    else:
+    for i in range(N-1):
+        if road[i] == road[i+1]:
+            continue
+        elif abs(road[i] - road[i+1]) > 1:
+            return 0
+        elif road[i] > road[i+1]:
+            temp = road[i+1]
+            for j in range(i+1, i+L+1):
+                # j가 맵 안에 있을 때
+                if 0 <= j < N:
+                    # 높이가 다를 때, 이미 건설 되었을 때
+                    if temp != road[j]:
                         return 0
+                    elif used[j]:
+                        return 0
+                    # 위의 경우가 아니면 건설
+                    used[j] = True
                 else:
                     return 0
-                delta += 1
-        elif road[i] - road[i + 1] == -1:
-            delta = 0
-            while abs(delta) < L:
-                if 0 <= i + delta < N:
-                    if road[i + 1] - road[i + delta] == -1:
-                        used[i + delta] = True
-                    else:
+        else:
+            temp = road[i]
+            for j in range(i, i-L, -1):
+                if 0 <= j < N:
+                    if temp != road[j]:
                         return 0
+                    elif used[j]:
+                        return 0
+                    used[j] = True
                 else:
                     return 0
-                delta -= 1
-        i += 1
     return 1
+
 
 for road in candidate:
     count += check(road)
