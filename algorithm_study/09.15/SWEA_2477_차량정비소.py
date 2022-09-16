@@ -1,6 +1,6 @@
 import sys
 
-sys.stdin = open("input.txt", "r", encoding="UTF-8")
+sys.stdin = open("09.15/차량정비소.txt", "r", encoding="UTF-8")
 
 T = int(input())
 
