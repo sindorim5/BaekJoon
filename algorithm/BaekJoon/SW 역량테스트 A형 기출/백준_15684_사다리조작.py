@@ -5,30 +5,55 @@ input = sys.stdin.readline
 
 n, m, h = map(int, input().split())
 
-numbers = [i for i in range(n+1)]
-matrix = [[0 for _ in range(n+1)] for _ in range(h+1)]
-
+matrix = [[0 for _ in range(n)] for _ in range(h)]
 for _ in range(m):
     a, b = map(int, input().split())
-    matrix[a][b] = 1
+    matrix[a-1][b-1] = 1
+
+result = 999999999
+
 
 def down(arr):
-    cnt = 0
-    for num in range(1, n+1):
-        temp = num
-        i = 1
-        while i <= h:
-            if arr[i][temp]:
+    i = 0
+    while i < n:
+        temp = i
+        for y in range(h):
+            if arr[y][temp]:
                 temp += 1
-            elif arr[i][temp - 1]:
+            elif temp > 0 and arr[y][temp - 1]:
                 temp -= 1
+        if temp == i:
             i += 1
-        if num == temp:
-            cnt += 1
+            continue
         else:
-            break
-    if cnt == n:
-        return True
-    else:
-        return False
+            return False
+    return True
 
+
+def dfs(count, y, x):
+    global result
+    if result <= count:
+        return
+    if down(matrix):
+        result = min(result, count)
+        return
+    if count == 3:
+        return
+    for nY in range(y, h):
+        if nY == y:
+            idx = x
+        else:
+            idx = 0
+        for nX in range(idx, n-1):
+            if matrix[nY][nX] == 0:
+                matrix[nY][nX] = 1
+                dfs(count + 1, nY, nX + 2)
+                matrix[nY][nX] = 0
+
+
+dfs(0, 0, 0)
+
+if result <= 3:
+    print(result)
+else:
+    print(-1)
