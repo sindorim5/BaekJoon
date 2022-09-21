@@ -14,6 +14,10 @@ for test_case in range(1, T+1):
     times = []
     timeSet = []
 
+    for asdf in matrix:
+        print(asdf)
+    print("//////////////////")
+
     for i in range(n-1):
         for j in range(i+1, n):
             # x 좌표가 같고 방향이 반대인 경우
