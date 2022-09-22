@@ -1,158 +1,53 @@
 import sys
+from collections import deque
 
-# sys.stdin = open("09.22/원자소멸시뮬레이션.txt", "r", encoding="UTF-8")
-sys.stdin = open("09.22/temp.txt", "r", encoding="UTF-8")
+sys.stdin = open("09.22/원자소멸시뮬레이션.txt", "r", encoding="UTF-8")
 
+# 상 하 좌 우
+direction = [[1, 0], [-1, 0], [0, -1], [0, 1]]
+matrix = [[0] * 4001 for _ in range(4001)]
 T = int(input())
 
 for test_case in range(1, T+1):
-    n = int(input())
-    matrix = [list(map(int, input().split())) for _ in range(n)]
-    atoms = [True for _ in range(n)]
-    crash = []
-    crashSet = []
-    times = []
-    timeSet = []
-
-    for asdf in matrix:
-        print(asdf)
-    print("//////////////////")
-
-    for i in range(n-1):
-        for j in range(i+1, n):
-            # x 좌표가 같고 방향이 반대인 경우
-            if matrix[i][0] == matrix[j][0]:
-                if matrix[i][1] > matrix[j][1] and matrix[i][2] == 1 and matrix[j][2] == 0:
-                    time = abs(matrix[i][1] - matrix[j][1]) / 2
-                    crash.append([time, [matrix[i][0], matrix[j][1]+time], [i, j]])
-                    times.append([time, [matrix[i][0], matrix[j][1]+time]])
-                elif matrix[i][1] < matrix[j][1] and matrix[i][2] == 0 and matrix[j][2] == 1:
-                    time = abs(matrix[i][1] - matrix[j][1]) / 2
-                    crash.append([time, [matrix[i][0], matrix[j][1]-time], [i, j]])
-                    times.append([time, [matrix[i][0], matrix[j][1]-time]])
-            # y 좌표가 같고 방향이 반대인 경우
-            elif matrix[i][1] == matrix[j][1]:
-                if matrix[i][0] > matrix[j][0] and matrix[i][2] == 2 and matrix[j][2] == 3:
-                    time = abs(matrix[i][0] - matrix[j][0]) / 2
-                    crash.append([time, [matrix[i][0]-time, matrix[j][1]], [i, j]])
-                    times.append([time, [matrix[i][0]-time, matrix[j][1]]])
-                elif matrix[i][0] < matrix[j][0] and matrix[i][2] == 3 and matrix[j][2] == 2:
-                    time = abs(matrix[i][0] - matrix[j][0]) / 2
-                    crash.append([time, [matrix[i][0]+time, matrix[j][1]], [i, j]])
-                    times.append([time, [matrix[i][0]+time, matrix[j][1]]])
-
-            # i가 좌로 이동할 때
-            if matrix[i][2] == 2:
-                # j가 아래로 이동하고
-                if matrix[j][2] == 1:
-                    # i의 좌상단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] < matrix[i][0] and matrix[j][1] > matrix[i][1]:
-                        xDiff = matrix[i][0] - matrix[j][0]
-                        yDiff = matrix[j][1] - matrix[i][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[j][0], matrix[i][1]],[i, j]])
-                            times.append([xDiff, [matrix[j][0], matrix[i][1]]])
-                # j가 위로 이동하고
-                elif matrix[j][2] == 0:
-                    # i의 좌하단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] < matrix[i][0] and matrix[j][1] < matrix[i][1]:
-                        xDiff = matrix[i][0] - matrix[j][0]
-                        yDiff = matrix[i][1] - matrix[j][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[j][0], matrix[i][1]], [i, j]])
-                            times.append([xDiff, [matrix[j][0], matrix[i][1]]])
-
-            # i가 우로 이동할 때
-            if matrix[i][2] == 3:
-                # j가 아래로 이동하고
-                if matrix[j][2] == 1:
-                    # i의 우상단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] > matrix[i][0] and matrix[j][1] > matrix[i][1]:
-                        xDiff = matrix[j][0] - matrix[i][0]
-                        yDiff = matrix[j][1] - matrix[i][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[j][0], matrix[i][1]],[i, j]])
-                            times.append([xDiff, [matrix[j][0], matrix[i][1]]])
-                # j가 위로 이동하고
-                elif matrix[j][2] == 0:
-                    # i의 우하단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] > matrix[i][0] and matrix[j][1] < matrix[i][1]:
-                        xDiff = matrix[j][0] - matrix[i][0]
-                        yDiff = matrix[i][1] - matrix[j][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[j][0], matrix[i][1]], [i, j]])
-                            times.append([xDiff, [matrix[j][0], matrix[i][1]]])
-
-            # i가 위로 이동할 때
-            if matrix[i][2] == 0:
-                # j가 좌로 이동하고
-                if matrix[j][2] == 2:
-                    # i의 우상단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] > matrix[i][0] and matrix[j][1] > matrix[i][1]:
-                        xDiff = matrix[j][0] - matrix[i][0]
-                        yDiff = matrix[j][1] - matrix[i][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[i][0], matrix[j][1]], [i, j]])
-                            times.append([xDiff, [matrix[i][0], matrix[j][1]]])
-                # j가 우로 이동하고
-                elif matrix[j][2] == 3:
-                    # i의 좌상단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] > matrix[i][0] and matrix[j][1] < matrix[i][1]:
-                        xDiff = matrix[j][0] - matrix[i][0]
-                        yDiff = matrix[i][1] - matrix[j][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[i][0], matrix[j][1]], [i, j]])
-                            times.append([xDiff, [matrix[i][0], matrix[j][1]]])
-            
-            # i가 아래로 이동할 때
-            if matrix[i][2] == 1:
-                # j가 좌로 이동하고
-                if matrix[j][2] == 2:
-                    # i의 우하단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] > matrix[i][0] and matrix[j][1] < matrix[i][1]:
-                        xDiff = matrix[j][0] - matrix[i][0]
-                        yDiff = matrix[i][1] - matrix[j][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[i][0], matrix[j][1]], [i, j]])
-                            times.append([xDiff, [matrix[i][0], matrix[j][1]]])
-                # j가 우로 이동하고
-                elif matrix[j][2] == 3:
-                    # i의 좌하단에 있다면 직각 이등변 삼각형 체크
-                    if matrix[j][0] < matrix[i][0] and matrix[j][1] < matrix[i][1]:
-                        xDiff = matrix[i][0] - matrix[j][0]
-                        yDiff = matrix[i][1] - matrix[j][1]
-                        if xDiff == yDiff:
-                            crash.append([xDiff, [matrix[i][0], matrix[j][1]],[i, j]])
-                            times.append([xDiff, [matrix[i][0], matrix[j][1]]])
-
-    times.sort()
-    crash.sort()
-    # times 정리
-    for element in times:
-        if element not in timeSet:
-            timeSet.append(element)
-    # crash 정리
-    i = 0
-    for element in timeSet:
-        time, cord = element[0], element[1]
-        crashSet.append([time, set()])
-        while crash[i][0] == time and crash[i][1] == cord:
-            for idx in crash[i][2]:
-                crashSet[-1][1].add(idx)
-            i += 1
-            if i == len(crash):
-                break
+    N = int(input())
+    # -1000 ~ 1000을 0.5 단위 고려해서 0 ~ 4000까지. 에너지는 배열.
+    atoms = deque()  # x, y, 방향, 에너지
+    for i in range(N):
+        data = list(map(int, input().split()))
+        # 입력 받은 데이터를 0 ~ 4000 좌표계에 맞게 수정
+        data[0] = (data[0] + 1000) * 2
+        data[1] = (data[1] + 1000) * 2
+        matrix[data[1]][data[0]] = data[3]
+        atoms.append(data)
 
     result = 0
-    for element in crashSet:
-        temp = list(element[1])
-        candidate = []
-        for i in temp:
-            if atoms[i]:
-                candidate.append(i)
-        if len(candidate) > 1:
-            for j in candidate:
-                result += matrix[j][3]
-                atoms[j] = False
+    while len(atoms) != 0:
+        number = len(atoms)
+        for _ in range(number):
+            q = atoms.popleft()
+            nowX, nowY, d, e = q[0], q[1], q[2], q[3]
+            nX, nY = nowX + direction[d][1], nowY + direction[d][0]
+            if 0 <= nY < 4001 and 0 <= nX < 4001:
+                # 충돌이 없었으면 에너지는 같은 값이어야 한다.
+                if e == matrix[nowY][nowX]:
+                    # 아무도 방문하지 않은 곳이면
+                    if matrix[nY][nX] == 0:
+                        matrix[nowY][nowX] = 0  # 이전 위치 초기화
+                        # 이동
+                        q[0], q[1] = nX, nY
+                        matrix[nY][nX] = e
+                        atoms.append(q)  # 다시 리스트에 집어 넣기
+                    # 이미 다른 원자가 방문한 곳이면
+                    else:
+                        matrix[nY][nX] += e
+                        # 해당 위치에 자신의 원자 에너지 더해주고
+                        matrix[nowY][nowX] = 0  # 이전 위치 초기화
+                # 충돌이 일어난 경우
+                else:
+                    result += matrix[nowY][nowX]  # power에 충돌한 에너지 총합 더해주고
+                    matrix[nowY][nowX] = 0  # 현재 위치 초기화
+            # 범위를 넘어가는 경우 값을 버린다.
+            else:
+                matrix[nowY][nowX] = 0  # 현재 위치 초기화
 
     print("#{} {}".format(test_case, result))
