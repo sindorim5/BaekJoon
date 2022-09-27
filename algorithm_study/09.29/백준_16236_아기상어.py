@@ -73,6 +73,3 @@ while True:
         sharkState[1] = 0
 
 print(time)
-
-
-
