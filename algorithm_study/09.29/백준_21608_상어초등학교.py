@@ -5,7 +5,7 @@ sys.stdin = open("input.txt", "r", encoding="UTF-8")
 # 상 하 좌 우
 dy = [-1, 1, 0, 0]
 dx = [0, 0, -1, 1]
-
+resultArr = [0, 1, 10, 100, 1000]
 n = int(input())
 
 likeList = [[] for _ in range(n*n + 1)]
@@ -86,15 +86,6 @@ for y in range(n):
                 if matrix[nY][nX] in like:
                     count += 1
 
-        if count == 0:
-            continue
-        elif count == 1:
-            result += 1
-        elif count == 2:
-            result += 10
-        elif count == 3:
-            result += 100
-        elif count == 4:
-            result += 1000
+        result += resultArr[count]
 
 print(result)
