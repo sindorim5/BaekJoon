@@ -52,10 +52,6 @@ def dfs(depth, arr):
     global minCount
     if depth == cctvCount:
         minCount = min(minCount, countZero(arr))
-        print(countZero(arr))
-        for asdf in arr:
-            print(asdf)
-        print("********************")
         return
 
     y, x = cctvLoc[depth][0], cctvLoc[depth][1]
