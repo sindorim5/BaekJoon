@@ -355,6 +355,8 @@ venv.bak/
 # mkdocs documentation
 /site
 
+.gradle
+
 # mypy
 .mypy_cache/
 .dmypy.json
