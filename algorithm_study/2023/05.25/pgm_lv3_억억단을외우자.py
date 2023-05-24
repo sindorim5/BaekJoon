@@ -64,7 +64,7 @@ def submultiple(num):
 """
 
 """
-# 90점
+# 90점 -> 약수 구하는 방식도 느리고 답을 찾는 과정도 느림
 from collections import defaultdict
 
 def solution(e, starts):
@@ -93,33 +93,24 @@ def solution(e, starts):
 
 
 def solution(e, starts):
-    result = []
-    divisor = [1 for _ in range(e+1)]
-    memo = 0
-    starts_dict = {}
-    sorted_starts = sorted(starts)
+    answer = []
+    divisors = [0 for _ in range(e+1)]
+    answers = [0 for _ in range(e+1)]
+    max_value = 0
 
-    for i in range(2, e+1):
-        for j in range(i, e+1, i):
-            divisor[j] += 1
+    for n in range(1, int(e**0.5)+1):
+        divisors[n*n] += 1
+        for i in range(n*(n+1), e+1, n):
+            divisors[i] += 2
 
-    for i in range(len(sorted_starts)):
-        if memo == 0:
-            max_index = divisor[sorted_starts[i]:].index(
-                max(divisor[sorted_starts[i]:])
-            ) + sorted_starts[i]
-            starts_dict[sorted_starts[i]] = max_index
-            memo = max_index
+    for i in range(e, -1, -1):
+        if divisors[i] >= max_value:
+            max_value = divisors[i]
+            answers[i] = i
         else:
-            if sorted_starts[i] <= memo:
-                starts_dict[sorted_starts[i]] = memo
-            else:
-                memo = divisor[sorted_starts[i]:].index(
-                    max(divisor[sorted_starts[i]:]))+sorted_starts[i]
-                starts_dict[sorted_starts[i]] = memo
-        print(i, starts_dict, sorted_starts)
+            answers[i] = answers[i+1]
 
     for s in starts:
-        result.append(starts_dict.get(s))
+        answer.append(answers[s])
 
-    return result
+    return answer
