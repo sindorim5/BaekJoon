@@ -10,6 +10,7 @@ dp[0] = 1
 dp[1] = 3
 
 for i in range(2, n+1):
+    # for문을 돌 때 % 연산을 안하니까 메모리 초과
     dp[i] = (dp[i - 2] + dp[i - 1] * 2) % 9901
 
 print(dp[n])
