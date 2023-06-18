@@ -46,7 +46,6 @@ public class 톱니바퀴2 {
                 gears[leftIndex] = rotation(tempDirection, gears[leftIndex]);
             }
 
-
         }
 
         int count = 0;
@@ -63,18 +62,17 @@ public class 톱니바퀴2 {
 
         if (direction == -1) {
             save = gear[0];
-            index = 7;
+            index = 0;
         } else {
             save = gear[7];
-            index = 0;
+            index = 7;
         }
 
         for (int i = 0; i < 7; i++) {
-            gear[index + direction] = gear[index];
-            index += direction;
+            gear[index] = gear[index - direction];
+            index -= direction;
         }
-        gear[7 - index] = save;
-
+        gear[index] = save;
         return gear;
     }
 
