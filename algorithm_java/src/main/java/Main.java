@@ -1,9 +1,6 @@
-import baekjoon.gold.톱니바퀴2;
-import programmers.lv1.모의고사;
-import programmers.lv2.소수찾기;
+import baekjoon.gold.four.주간미팅;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
 
@@ -14,7 +11,7 @@ public class Main {
 //            "011"
 //        );
 //        System.out.println(sol);
-        톱니바퀴2 temp = new 톱니바퀴2();
+        주간미팅 temp = new 주간미팅();
         temp.main(args);
     }
 
