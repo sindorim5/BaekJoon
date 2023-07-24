@@ -5,36 +5,40 @@ import java.util.*;
 import java.io.*;
 
 public class 수퍼바이러스 {
-    static double K, P, N;
+    static long K, P, N;
 
     public static void main(String args[]) throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        K = Double.parseDouble(st.nextToken());
-        P = Double.parseDouble(st.nextToken());
-        N = Double.parseDouble(st.nextToken());
+        K = Long.parseLong(st.nextToken());
+        P = Long.parseLong(st.nextToken());
+        N = Long.parseLong(st.nextToken());
 
-        double result = dfs(P, 10 * N);
+        long result = dfs(P, 10 * N);
 
-        System.out.println(String.format("%.0f", K * result % 1000000007));
+        System.out.println(K * result % 1000000007);
     }
 
-    static double dfs(double p, double n) {
-        if (n == 1.0) {
+    static long dfs(long p, long n) {
+        if (n == 1) {
             return p;
         }
 
-        double temp = 0.0;
+        long temp = 0L;
 
-        if (n % 2 == 0.0) {
+        if (n % 2 == 0) {
             temp = dfs(p, n / 2);
             return temp * temp % 1000000007;
         } else {
             temp = dfs(p, (n - 1) / 2);
-            return temp * temp * p % 1000000007;
+            return (temp * temp % 1000000007) * p % 1000000007;
         }
     }
 
 }
+
+/*
+3^10 = 3^5 * 3^5 = (3^2 * 3^2 * 3) ^ 2
+ */
