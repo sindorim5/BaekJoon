@@ -2,21 +2,21 @@ package programmers.lv2;
 
 import java.util.Arrays;
 
-class Test {
-    public static void main(String[] args) {
-//        int cap = 2;
-//        int n = 7;
-//        int[] deliveries = {1, 0, 2, 0, 1, 0, 2};
-//        int[] pickups = {0, 2, 0, 1, 0, 2, 0};
-
-        int cap = 4;
-        int n = 5;
-        int[] deliveries = {1, 0, 3, 1, 2};
-        int[] pickups = {0, 3, 0, 4, 0};
-
-        new 택배_배달과_수거하기().solution(cap, n, deliveries, pickups);
-    }
-}
+//class Test {
+//    public static void main(String[] args) {
+////        int cap = 2;
+////        int n = 7;
+////        int[] deliveries = {1, 0, 2, 0, 1, 0, 2};
+////        int[] pickups = {0, 2, 0, 1, 0, 2, 0};
+//
+//        int cap = 4;
+//        int n = 5;
+//        int[] deliveries = {1, 0, 3, 1, 2};
+//        int[] pickups = {0, 3, 0, 4, 0};
+//
+//        new 택배_배달과_수거하기().solution(cap, n, deliveries, pickups);
+//    }
+//}
 
 
 public class 택배_배달과_수거하기 {

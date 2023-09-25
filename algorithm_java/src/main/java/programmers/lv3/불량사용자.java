@@ -3,14 +3,14 @@ package programmers.lv3;
 import java.util.Arrays;
 import java.util.HashSet;
 
-class Test {
-    public static void main(String[] args) {
-        String[] user_Id = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
-        String[] banned_id = {"fr*d*", "abc1**"};
-
-        new 불량사용자().solution(user_Id, banned_id);
-    }
-}
+//class Test {
+//    public static void main(String[] args) {
+//        String[] user_Id = {"frodo", "fradi", "crodo", "abc123", "frodoc"};
+//        String[] banned_id = {"fr*d*", "abc1**"};
+//
+//        new 불량사용자().solution(user_Id, banned_id);
+//    }
+//}
 
 
 public class 불량사용자 {
