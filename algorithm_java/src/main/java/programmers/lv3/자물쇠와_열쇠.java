@@ -1,13 +1,12 @@
 package programmers.lv3;
 
-class Test {
-    public static void main(String[] args) {
-        int[][] key = {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}};
-        int[][] lock = {{1, 1, 1}, {1, 1, 0}, {1, 0, 1}};
-        System.out.println(new 자물쇠와_열쇠().solution(key, lock));
-    }
-
-}
+//class Test {
+//    public static void main(String[] args) {
+//        int[][] key = {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}};
+//        int[][] lock = {{1, 1, 1}, {1, 1, 0}, {1, 0, 1}};
+//        System.out.println(new 자물쇠와_열쇠().solution(key, lock));
+//    }
+//}
 
 public class 자물쇠와_열쇠 {
 
