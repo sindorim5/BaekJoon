@@ -2,15 +2,15 @@ package programmers.lv3;
 
 import java.util.Arrays;
 
-class Test {
-
-    public static void main(String[] args) {
-        int[] stones = {2, 4, 5, 3, 2, 1, 4, 2, 5, 1};
-        int k = 3;
-        new 징검다리_건너기().solution(stones, k);
-    }
-
-}
+//class Test {
+//
+//    public static void main(String[] args) {
+//        int[] stones = {2, 4, 5, 3, 2, 1, 4, 2, 5, 1};
+//        int k = 3;
+//        new 징검다리_건너기().solution(stones, k);
+//    }
+//
+//}
 
 public class 징검다리_건너기 {
     public int solution(int[] stones, int k) {
