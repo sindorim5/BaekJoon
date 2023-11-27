@@ -4,21 +4,21 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Test {
-
-    public static void main(String[] args) {
-        String[][] places = {
-                {"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"},
-                {"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
-                {"PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"},
-                {"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"},
-                {"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"}
-        };
-        int[] a = new 거리두기_확인하기().solution(places);
-        System.out.println(Arrays.toString(a));
-    }
-
-}
+//class Test {
+//
+//    public static void main(String[] args) {
+//        String[][] places = {
+//                {"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"},
+//                {"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
+//                {"PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"},
+//                {"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"},
+//                {"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"}
+//        };
+//        int[] a = new 거리두기_확인하기().solution(places);
+//        System.out.println(Arrays.toString(a));
+//    }
+//
+//}
 
 public class 거리두기_확인하기 {
     static int[] dY = {1, 0, -1, 0};
